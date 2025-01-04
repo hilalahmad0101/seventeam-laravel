@@ -46,9 +46,10 @@
     align-items: center;
     justify-content: center;">
                 <div class="col-6" style="margin-top: 130px">
+                    <h1 class="" style="text-align: center">Admin Login</h1>
                     <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title" style="text-align: center">Login</h3>
+                        <div class="card-header" style="margin:auto">
+                            <img src="{{ asset('logo.jpeg') }}" style="width: 150px;" alt="">
                         </div>
                       @yield('content')
                     </div>
