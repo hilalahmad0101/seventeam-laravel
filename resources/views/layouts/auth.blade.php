@@ -1,182 +1,385 @@
-<!doctype html> 
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>@yield('title') - Seven Team.</title>
-    <!-- CSS files -->
-    <link href="{{ asset('css/tabler.min.css')}}" rel="stylesheet"/>
-    <link href="{{ asset('css/tabler-flags.min.css')}}" rel="stylesheet"/>
-    <link href="{{ asset('css/tabler-payments.min.css')}}" rel="stylesheet"/>
-    <link href="{{ asset('css/tabler-vendors.min.css')}}" rel="stylesheet"/>
-    <link href="{{ asset('css/demo.min.css')}}" rel="stylesheet"/>
-    <style>
-      @import url('https://rsms.me/inter/inter.css');
-    </style>
-  </head>
-  <body >
-    <script src="{{ asset('js/demo-theme.min.js')}}"></script>
-    <div class="page">
-      <!-- Navbar -->
-      <header class="navbar navbar-expand-md d-print-none" >
-        <div class="container-xl">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-            <a href=".">
-              <h4>Seven Team</h4>
-            </a>
-          </div>
-          <div class="navbar-nav flex-row order-md-last">
-            <div class="nav-item dropdown">
-              <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
-                <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000m.jpg)"></span>
-                <div class="d-none d-xl-block ps-2">
-                  <div>Admin</div>
-                  <div class="mt-1 small text-secondary">Admin</div>
-                </div>
-              </a>
-              {{-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <a href="#" class="dropdown-item">Status</a>
-                <a href="./profile.html" class="dropdown-item">Profile</a>
-                <a href="#" class="dropdown-item">Feedback</a>
-                <div class="dropdown-divider"></div>
-                <a href="./settings.html" class="dropdown-item">Settings</a>
-                <a href="./sign-in.html" class="dropdown-item">Logout</a>
-              </div> --}}
-            </div>
-          </div>
-        </div>
-      </header>
-      <header class="navbar-expand-md">
-        <div class="collapse navbar-collapse" id="navbar-menu">
-          <div class="navbar">
-            <div class="container-xl">
-              <div class="row flex-fill align-items-center">
-                <div class="col">
-                  <ul class="navbar-nav">
-                    <li class="nav-item active">
-                      <a class="nav-link" href="./" >
-                        <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
-                        </span>
-                        <span class="nav-link-title">
-                          Home
-                        </span>
-                      </a>
-                    </li>
-                    <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
-                        <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/package -->
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5" /><path d="M12 12l8 -4.5" /><path d="M12 12l0 9" /><path d="M12 12l-8 -4.5" /><path d="M16 5.25l-8 4.5" /></svg>
-                        </span>
-                        <span class="nav-link-title">
-                          Category
-                        </span>
-                      </a>
-                      <div class="dropdown-menu">
-                        <div class="dropdown-menu-columns">
-                          <div class="dropdown-menu-column">
-                            <a class="dropdown-item" href="{{ route('admin.category.list') }}">
-                              List Category
-                            </a>
-                            <a class="dropdown-item" href="{{ route('admin.category.create') }}">
-                              Create Category
-                            </a>
-                          </div>
-                        </div>
-                    </li> 
-                    <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
-                        <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/package -->
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5" /><path d="M12 12l8 -4.5" /><path d="M12 12l0 9" /><path d="M12 12l-8 -4.5" /><path d="M16 5.25l-8 4.5" /></svg>
-                        </span>
-                        <span class="nav-link-title">
-                          Video
-                        </span>
-                      </a>
-                      <div class="dropdown-menu">
-                        <div class="dropdown-menu-columns">
-                          <div class="dropdown-menu-column">
-                            <a class="dropdown-item" href="{{ route('admin.video.list') }}">
-                              List Video
-                            </a>
-                            <a class="dropdown-item" href="{{ route('admin.video.create') }}">
-                              Create Video
-                            </a>
-                          </div>
-                        </div>
-                    </li> 
-                  </ul>
-                </div>
-                <div class="col-2 d-none d-xxl-block">
-                  <div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
-                    <form action="./" method="get" autocomplete="off" novalidate>
-                      <div class="input-icon">
-                        <span class="input-icon-addon">
-                          <!-- Download SVG icon from http://tabler-icons.io/i/search -->
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg>
-                        </span>
-                        <input type="text" value="" class="form-control" placeholder="Search…" aria-label="Search in website">
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
-      <div class="page-wrapper">
-        <!-- Page header -->
-        @yield('content')
-       
-        <!-- Page body -->
-        
-        {{-- <footer class="footer footer-transparent d-print-none">
-          <div class="container-xl">
-            <div class="row text-center align-items-center flex-row-reverse">
-              <div class="col-lg-auto ms-lg-auto">
-                <ul class="list-inline list-inline-dots mb-0">
-                  <li class="list-inline-item"><a href="https://tabler.io/docs" target="_blank" class="link-secondary" rel="noopener">Documentation</a></li>
-                  <li class="list-inline-item"><a href="./license.html" class="link-secondary">License</a></li>
-                  <li class="list-inline-item"><a href="https://github.com/tabler/tabler" target="_blank" class="link-secondary" rel="noopener">Source code</a></li>
-                  <li class="list-inline-item">
-                    <a href="https://github.com/sponsors/codecalm" target="_blank" class="link-secondary" rel="noopener">
-                      <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon text-pink icon-inline"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" /></svg>
-                      Sponsor
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Seven Team - @yield('title')</title>
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+    <link rel="icon" href="assets/img/kaiadmin/favicon.ico" type="image/x-icon" />
+
+    <!-- Fonts and icons -->
+    <script src="{{ asset('assets/js/plugin/webfont/webfont.min.js') }}"></script>
+    <script>
+        WebFont.load({
+            google: {
+                families: ["Public Sans:300,400,500,600,700"]
+            },
+            custom: {
+                families: [
+                    "Font Awesome 5 Solid",
+                    "Font Awesome 5 Regular",
+                    "Font Awesome 5 Brands",
+                    "simple-line-icons",
+                ],
+                urls: ["{{ asset('assets/css/fonts.min.css') }}"],
+            },
+            active: function() {
+                sessionStorage.fonts = true;
+            },
+        });
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/kaiadmin.min.css') }}" />
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <div class="sidebar" data-background-color="dark">
+            <div class="sidebar-logo">
+                <!-- Logo Header -->
+                <div class="logo-header" data-background-color="dark">
+                    <a href="index.html" class="logo">
+                        <img src="assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand"
+                            height="20" />
                     </a>
-                  </li>
-                </ul>
-              </div>
-              <div class="col-12 col-lg-auto mt-3 mt-lg-0">
-                <ul class="list-inline list-inline-dots mb-0">
-                  <li class="list-inline-item">
-                    Copyright &copy; 2024
-                    <a href="." class="link-secondary">Tabler</a>.
-                    All rights reserved.
-                  </li>
-                  <li class="list-inline-item">
-                    <a href="./changelog.html" class="link-secondary" rel="noopener">
-                      v1.0.0-beta21
-                    </a>
-                  </li>
-                </ul>
-              </div>
+                    <div class="nav-toggle">
+                        <button class="btn btn-toggle toggle-sidebar">
+                            <i class="gg-menu-right"></i>
+                        </button>
+                        <button class="btn btn-toggle sidenav-toggler">
+                            <i class="gg-menu-left"></i>
+                        </button>
+                    </div>
+                    <button class="topbar-toggler more">
+                        <i class="gg-more-vertical-alt"></i>
+                    </button>
+                </div>
+                <!-- End Logo Header -->
             </div>
-          </div>
-        </footer> --}}
-      </div>
-    </div> 
-    <!-- js/Libs JS -->
-    <script src="{{ asset('libs/apexcharts/dist/apexcharts.min.js')}}" defer></script>
-    <script src="{{ asset('libs/jsvectormap/dist/jsvectormap.min.js')}}" defer></script>
-    <script src="{{ asset('libs/jsvectormap/dist/maps/world.js')}}" defer></script>
-    <script src="{{ asset('libs/jsvectormap/dist/maps/world-merc.js')}}" defer></script> 
-    <script src="{{ asset('js/tabler.min.js')}}" defer></script>
-    <script src="{{ asset('js/demo.min.js')}}" defer></script>
-  </body>
+            <div class="sidebar-wrapper scrollbar scrollbar-inner">
+                <div class="sidebar-content">
+                    <ul class="nav nav-secondary">
+                        <li class="nav-item {{ Request::routeIs('admin.dashboard') ?'active':'' }}">
+                            <a href="{{ route('admin.dashboard') }}" class="collapsed">
+                                <i class="fas fa-home"></i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+                        <li class="nav-section">
+                            <span class="sidebar-mini-icon">
+                                <i class="fa fa-ellipsis-h"></i>
+                            </span>
+                            <h4 class="text-section">Main area</h4>
+                        </li>
+                        <li class="nav-item {{ Request::routeIs('admin.category.list') ?'active':'' }}">
+                            <a data-bs-toggle="collapse" href="#category">
+                                <i class="fas fa-layer-group"></i>
+                                <p>Category</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="collapse" id="category">
+                                <ul class="nav nav-collapse">
+                                    <li>
+                                        <a href="{{ route('admin.category.list') }}">
+                                            <span class="sub-item">Category List</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('admin.category.create') }}">
+                                            <span class="sub-item">Category Create</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item {{ Request::routeIs('admin.banner.list') ?'active':'' }}">
+                            <a data-bs-toggle="collapse" href="#banner">
+                                <i class="fas fa-image"></i>
+                                <p>Banner</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="collapse" id="banner">
+                                <ul class="nav nav-collapse">
+                                    <li>
+                                        <a href="{{ route('admin.banner.list') }}">
+                                            <span class="sub-item">Banner List</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('admin.banner.create') }}">
+                                            <span class="sub-item">Banner Create</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item {{ Request::routeIs('admin.video.list') ?'active':'' }}">
+                            <a data-bs-toggle="collapse" href="#video">
+                                <i class="fas fa-video"></i>
+                                <p>Video</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="collapse" id="video">
+                                <ul class="nav nav-collapse">
+                                    <li>
+                                        <a href="{{ route('admin.video.list') }}">
+                                            <span class="sub-item">Video List</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('admin.video.create') }}">
+                                            <span class="sub-item">Video Create</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item {{ Request::routeIs('admin.user.list') ?'active':'' }} ">
+                            <a data-bs-toggle="collapse" href="#user">
+                                <i class="fas fa-users"></i>
+                                <p>User</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="collapse" id="user">
+                                <ul class="nav nav-collapse">
+                                    <li>
+                                        <a href="{{ route('admin.user.list') }}">
+                                            <span class="sub-item">User List</span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- End Sidebar -->
+
+        <div class="main-panel">
+            <div class="main-header">
+                <div class="main-header-logo">
+                    <!-- Logo Header -->
+                    <div class="logo-header" data-background-color="dark">
+                        <a href="{{ route('admin.dashboard') }}" class="logo">
+                            <img src="assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand"
+                                height="20" />
+                        </a>
+                        <div class="nav-toggle">
+                            <button class="btn btn-toggle toggle-sidebar">
+                                <i class="gg-menu-right"></i>
+                            </button>
+                            <button class="btn btn-toggle sidenav-toggler">
+                                <i class="gg-menu-left"></i>
+                            </button>
+                        </div>
+                        <button class="topbar-toggler more">
+                            <i class="gg-more-vertical-alt"></i>
+                        </button>
+                    </div>
+                    <!-- End Logo Header -->
+                </div>
+                <!-- Navbar Header -->
+                <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
+                    <div class="container-fluid">
+                        {{-- <nav
+                            class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <button type="submit" class="btn btn-search pe-1">
+                                        <i class="fa fa-search search-icon"></i>
+                                    </button>
+                                </div>
+                                <input type="text" placeholder="Search ..." class="form-control" />
+                            </div>
+                        </nav> --}}
+
+                        <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
+                            <li class="nav-item topbar-user dropdown hidden-caret">
+                                <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#"
+                                    aria-expanded="false">
+                                    <div class="avatar-sm">
+                                        <img src="{{ asset('assets/img/profile.jpg') }}" alt="..."
+                                            class="avatar-img rounded-circle" />
+                                    </div>
+                                    <span class="profile-username">
+                                        <span class="op-7">Hi,</span>
+                                        <span class="fw-bold">{{ auth()->user()->name }}</span>
+                                    </span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-user animated fadeIn">
+                                    <div class="dropdown-user-scroll scrollbar-outer">
+                                        <li>
+                                            <div class="user-box">
+                                                <div class="avatar-lg">
+                                                    <img src="{{ asset('assets/img/profile.jpg') }}" alt="image profile"
+                                                        class="avatar-img rounded" />
+                                                </div>
+                                                <div class="u-text">
+                                                    <h4>{{ auth()->user()->name }}</h4>
+                                                    <p class="text-muted">{{ auth()->user()->email }}</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            {{-- <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">My Profile</a>
+                                            <a class="dropdown-item" href="#">Account Setting</a>
+                                            <div class="dropdown-divider"></div> --}}
+                                            <a class="dropdown-item" href="{{ route('admin.logout') }}">Logout</a>
+                                        </li>
+                                    </div>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- End Navbar -->
+            </div>
+
+            <div class="container">
+                <div class="page-inner">
+                    @yield('content')
+                </div>
+            </div>
+        </div>
+
+        <!-- End Custom template -->
+    </div>
+    <!--   Core JS Files   -->
+    <script src="{{ asset('assets/js/core/jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
+    <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
+
+    <!-- jQuery Scrollbar -->
+    <script src="{{ asset('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
+
+    <!-- Chart JS -->
+    <script src="{{ asset('assets/js/plugin/chart.js/chart.min.js') }}"></script>
+
+    <!-- jQuery Sparkline -->
+    <script src="{{ asset('assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js') }}"></script>
+
+    <!-- Chart Circle -->
+    <script src="{{ asset('assets/js/plugin/chart-circle/circles.min.js') }}"></script>
+
+    <!-- Datatables -->
+    <script src="{{ asset('assets/js/plugin/datatables/datatables.min.js') }}"></script>
+
+    <!-- Bootstrap Notify -->
+    <script src="{{ asset('assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
+
+    <!-- jQuery Vector Maps -->
+    <script src="{{ asset('assets/js/plugin/jsvectormap/jsvectormap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugin/jsvectormap/world.js') }}"></script>
+
+    <!-- Sweet Alert -->
+    <script src="{{ asset('assets/js/plugin/sweetalert/sweetalert.min.js') }}"></script>
+
+    <!-- Kaiadmin JS -->
+    <script src="{{ asset('assets/js/kaiadmin.min.js') }}"></script>
+
+    <!-- Kaiadmin DEMO methods, don't include it in your project! -->
+    <script src="{{ asset('assets/js/setting-demo.js') }}"></script>
+    <script src="{{ asset('assets/js/demo.js') }}"></script>
+    <script>
+        $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
+            type: "line",
+            height: "70",
+            width: "100%",
+            lineWidth: "2",
+            lineColor: "#177dff",
+            fillColor: "rgba(23, 125, 255, 0.14)",
+        });
+
+        $("#lineChart2").sparkline([99, 125, 122, 105, 110, 124, 115], {
+            type: "line",
+            height: "70",
+            width: "100%",
+            lineWidth: "2",
+            lineColor: "#f3545d",
+            fillColor: "rgba(243, 84, 93, .14)",
+        });
+
+        $("#lineChart3").sparkline([105, 103, 123, 100, 95, 105, 115], {
+            type: "line",
+            height: "70",
+            width: "100%",
+            lineWidth: "2",
+            lineColor: "#ffa534",
+            fillColor: "rgba(255, 165, 52, .14)",
+        });
+
+
+        @if (session()->has('success'))
+
+            $.notify({
+                icon: 'icon-ban',
+                title: 'Success',
+                message: '{{ session('success') }}',
+            }, {
+                type: 'success',
+                placement: {
+                    from: "top",
+                    align: "right"
+                },
+                time: 1000,
+            });
+        @endif
+
+        @if (session()->has('error'))
+
+            $.notify({
+                icon: 'icon-ban',
+                title: 'Error',
+                message: '{{ session('error') }}',
+            }, {
+                type: 'danger',
+                placement: {
+                    from: "top",
+                    align: "right"
+                },
+                time: 1000,
+            });
+        @endif
+            document.addEventListener('DOMContentLoaded', function() {
+                // Attach click event to all elements with 'btn-delete' class
+                document.addEventListener('click', function(event) {
+                    if (event.target.classList.contains('btn-delete')) {
+                        event.preventDefault();
+
+                        let deleteUrl = event.target.getAttribute('href');
+                        Swal.fire({
+                            title: 'Are you sure?',
+                            text: "You won't be able to revert this!",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, delete it!',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Redirect to delete URL
+                                window.location.href = deleteUrl;
+                            }
+                        });
+                    }
+                });
+            });
+
+    </script>
+
+    @stack('script')
+</body>
+
 </html>

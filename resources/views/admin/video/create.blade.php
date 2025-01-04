@@ -1,11 +1,11 @@
 @extends('layouts.auth')
 @section('title')
-    Video List
+    Video Create
 @endsection
 
 @section('content')
     {{-- <x-header title="Video - List" sub_title="Video" /> --}}
-    <div class="page-header d-print-none">
+    {{-- <div class="page-header d-print-none">
         <div class="container-xl">
             <div class="row g-2 align-items-center">
                 <div class="col">
@@ -19,6 +19,15 @@
                 </div>
             </div>
         </div>
+    </div> --}}
+    <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+        <div>
+            <h3 class="fw-bold mb-3">Video</h3>
+            <h6 class="op-7 mb-2">Video - <a href="{{ route('admin.video.list') }}">List</a> - Create</h6>
+        </div>
+        <div class="ms-md-auto py-2 py-md-0">
+            <a href="{{ route('admin.video.list') }}" class="btn btn-primary btn-round">Go Back</a>
+        </div>
     </div>
     <div class="page-body">
         <div class="container-xl ">
@@ -29,10 +38,10 @@
                             <h3 class="card-title">Video Create</h3>
                         </div>
                         <div class="card-body">
-                            <div class="col-lg-8">
+                            <div class="col-lg-12">
                                 <div class="row row-cards">
                                     <div class="col-12">
-                                        {{-- <form action="{{ route('admin.vodep') }}" method="POST" class="card"> --}}
+                                        {{-- <form action="{{ route('admin.vodep') }}" method="POST" class=""> --}}
                                         @csrf
                                         <div class="card-body">
                                             <div class="row row-cards">
@@ -49,7 +58,7 @@
                                                 <div class="col-sm-12 col-md-12">
                                                     <div class="mb-3">
                                                         <label class="form-label">Select Category</label>
-                                                        <select name="category_id" id="category_id" class="form-control">
+                                                        <select name="category_id" id="category_id" class="form-select">
                                                             <option value="">Select Category</option>
                                                             @foreach ($categories as $category)
                                                                 <option value="{{ $category->id }}">{{ $category->name }}
@@ -66,11 +75,13 @@
                                                         <label class="form-label">Enter Description</label>
                                                         <textarea name="description" class="form-control" id="description" cols="30" rows="10"></textarea>
                                                         @error('description')
-                                                            <span>{{ $message }}</span>
+                                                            <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </div>
                                                 </div>
+
                                                 <div class="col-sm-12 col-md-12">
+                                                    <label for="">Upload Video</label>
                                                     <input type="file" class="form-control" id="video-upload">
                                                     <progress id="progress-bar" value="0"
                                                         style="width: 100%;margin:10px 0px" max="100"></progress>

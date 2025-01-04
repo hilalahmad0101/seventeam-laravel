@@ -5,7 +5,7 @@
 
 @section('content')
     {{-- <x-header title="Category - List" sub_title="Category" /> --}}
-    <div class="page-header d-print-none">
+    {{-- <div class="page-header d-print-none">
         <div class="container-xl">
             <div class="row g-2 align-items-center">
                 <div class="col">
@@ -19,6 +19,15 @@
                 </div>
             </div>
         </div>
+    </div> --}}
+    <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+        <div>
+            <h3 class="fw-bold mb-3">Category</h3>
+            <h6 class="op-7 mb-2">Category - <a href="{{ route('admin.category.list') }}">List</a> - Create</h6>
+        </div>
+        <div class="ms-md-auto py-2 py-md-0">
+            <a href="{{ route('admin.category.list') }}" class="btn btn-primary btn-round">Go Back</a>
+        </div>
     </div>
     <div class="page-body">
         <div class="container-xl ">
@@ -29,13 +38,13 @@
                             <h3 class="card-title">Categories Create</h3>
                         </div>
                         <div class="card-body">
-                            <div class="col-lg-8">
+                            <div class="col-lg-12">
                                 <div class="row row-cards">
                                     <div class="col-12">
-                                        <form action="{{ route('admin.category.store') }}" method="POST" class="card">
+                                        <form action="{{ route('admin.category.store') }}" method="POST" class="">
                                             @csrf
                                             <div class="card-body">
-                                                <div class="row row-cards">
+                                                <div class="row ">
                                                     <div class="col-sm-12 col-md-12">
                                                         <div class="mb-3">
                                                             <label class="form-label">Enter Category Name</label>
@@ -52,7 +61,7 @@
                                                             <label class="form-label">Enter Description</label>
                                                             <input type="text" class="form-control" name="description" placeholder="Description" >
                                                             @error('description')
-                                                                <span>{{ $message }}</span>
+                                                                <span class="text-danger">{{ $message }}</span>
                                                             @enderror
                                                         </div>
                                                     </div>

@@ -5,7 +5,7 @@
 
 @section('content')
     {{-- <x-header title="video - List" sub_title="video" /> --}}
-    <div class="page-header d-print-none">
+    {{-- <div class="page-header d-print-none">
         <div class="container-xl">
             <div class="row g-2 align-items-center">
                 <div class="col">
@@ -18,6 +18,15 @@
                     </h2>
                 </div>
             </div>
+        </div>
+    </div> --}}
+    <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+        <div>
+            <h3 class="fw-bold mb-3">Video</h3>
+            <h6 class="op-7 mb-2">Video - <a href="{{ route('admin.category.list') }}">List</a></h6>
+        </div>
+        <div class="ms-md-auto py-2 py-md-0">
+            <a href="{{ route('admin.video.create') }}" class="btn btn-primary btn-round">Upload Video</a>
         </div>
     </div>
     <div class="page-body">
@@ -71,7 +80,7 @@
                                                 {{-- <a href="{{ route('admin.video.edit', ['id' => $video->id]) }}"
                                                     class="btn btn-success">Edit</a> --}}
                                                 <a href="{{ route('admin.video.delete', ['id' => $video->id]) }}"
-                                                    class="btn btn-danger">Delete</a>
+                                                    class="btn btn-danger btn-delete">Delete</a>
                                             </td>
                                         </tr>
                                     @empty

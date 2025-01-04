@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Video;
 use Illuminate\Http\Request;
@@ -150,6 +151,9 @@ class HomeController extends Controller
             $content = fread($file, $length);
             fclose($file);
 
+            $video->views = $video->views + 1;
+            $video->save();
+
             return response($content, 206, $responseHeaders);
 
         } catch (\Throwable $th) {
@@ -198,4 +202,27 @@ class HomeController extends Controller
         }
     }
 
+
+    public function getBanner()
+    {
+        try {
+            $banners = Banner::where('status', 1)->latest()->get();
+            if (count($banners) == 0) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'No banner found'
+                ], 404);
+            }
+            return response()->json([
+                'success' => true,
+                'banner' => $banners
+            ]);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'success' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
+    }
 }
