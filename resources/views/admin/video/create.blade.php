@@ -111,7 +111,7 @@
         const resumeButton = document.getElementById('resume-button');
         const uploadButton = document.getElementById('upload-button');
 
-        const CHUNK_SIZE = 10 * 1024 * 1024; // 10 MB
+        const CHUNK_SIZE = 1 * 1024 * 1024; // 10 MB
         let file, totalChunks, currentChunk = 0,
             uploading = false;
 
