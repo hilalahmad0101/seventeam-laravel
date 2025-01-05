@@ -59,4 +59,24 @@ class DashboardController extends Controller
         User::find($id)->delete();
         return back()->with('success', 'User deleted successfully');
     }
+
+    public function user_status($id)
+    {
+        $user = User::find($id);
+        if ($user->status == 0) {
+            $user->status = 1;
+            $user->save();
+            return response()->json([
+                'success'=>true,
+                'message'=>'Banned On successfully'
+            ]);
+        } else {
+            $user->status = 0;
+            $user->save();
+            return response()->json([
+                'success'=>true,
+                'message'=>'Banned Off successfully'
+            ]);
+        }
+    }
 }

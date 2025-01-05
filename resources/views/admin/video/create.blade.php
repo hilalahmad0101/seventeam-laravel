@@ -235,6 +235,8 @@
             if (currentChunk === totalChunks) {
                 alert('Upload complete!');
                 resetUploadState();
+                window.location.href='/video/list';
+
             }
         }
 

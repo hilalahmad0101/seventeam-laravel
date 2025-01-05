@@ -66,6 +66,7 @@
                                         <th>Current Chunk</th>
                                         <th>Total Chunk</th>
                                         <th>Thumbnail</th>
+                                        <th>Recommended</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -78,11 +79,17 @@
                                             <td>{{ $video->current_chunk }}</td>
                                             <td>{{ $video->total_chunks }}</td>
                                             <td>
-                                                <img src="{{ asset('images/video/thumbnail/'.$video->thumbnail) }}" style="width: 100px" alt="">
+                                                <input type="checkbox" class="custom-control-input toggle-recommendation"
+                                                    data-id="{{ $video->id }}"
+                                                    {{ $video->is_recommended ? 'checked' : '' }}>
                                             </td>
                                             <td>
-                                                {{-- <a href="{{ route('admin.video.edit', ['id' => $video->id]) }}"
-                                                    class="btn btn-success">Edit</a> --}}
+                                                <img src="{{ asset('images/video/thumbnail/' . $video->thumbnail) }}"
+                                                    style="width: 100px" alt="">
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('admin.video.edit', ['id' => $video->id]) }}"
+                                                    class="btn btn-success">Edit</a>
                                                 <a href="{{ route('admin.video.delete', ['id' => $video->id]) }}"
                                                     class="btn btn-danger btn-delete">Delete</a>
                                             </td>
@@ -104,4 +111,43 @@
             </div>
         </div>
     </div>
+    @push('script')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const checkboxes = document.querySelectorAll('.toggle-recommendation');
+
+                checkboxes.forEach((checkbox) => {
+                    checkbox.addEventListener('change', function() {
+                        const videoId = this.getAttribute('data-id');
+                        const isChecked = this.checked;
+
+                        fetch(`/change/status/${videoId}`, {
+                                method: 'POST',
+                                headers: {
+                                    'X-CSRF-TOKEN':  "{{ csrf_token() }}",
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({
+                                    is_recommended: isChecked ? 1 : 0
+                                }),
+                            })
+                            .then((response) => response.json())
+                            .then((data) => {
+                                if (data.success) {
+                                    alert(data.message);
+                                } else {
+                                    alert('Failed to update status');
+                                    this.checked = !isChecked; // Revert checkbox state
+                                }
+                            })
+                            .catch((e) => {
+                                console.log(e.message);
+                                alert('An error occurred');
+                                this.checked = !isChecked; // Revert checkbox state
+                            });
+                    });
+                });
+            });
+        </script>
+    @endpush
 @endsection

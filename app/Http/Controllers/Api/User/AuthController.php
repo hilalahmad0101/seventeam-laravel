@@ -162,6 +162,14 @@ class AuthController extends Controller
                 ]);
             }
 
+            
+            if ($user->status == 0) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Your account is banned', // Use "or" for clarity
+                ]);
+            }
+
 
             $user->tokens()->delete();
             $token = $user->createToken('Api Token')->plainTextToken;

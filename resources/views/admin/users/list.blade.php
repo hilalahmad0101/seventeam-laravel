@@ -49,6 +49,7 @@
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Is Verified</th>
+                                        <th>Banned</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -60,8 +61,11 @@
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->is_verified ? 1 : 0 }}</td>
                                             <td>
-                                                {{-- <a href="{{ route('admin.user.edit', ['id' => $user->id]) }}"
-                                                    class="btn btn-success">Edit</a> --}}
+                                                <input type="checkbox" class="custom-control-input toggle-recommendation"
+                                                    data-id="{{ $user->id }}"
+                                                    {{ $user->status ? 'checked' : '' }}>
+                                            </td>
+                                            <td>
                                                 <a href="{{ route('admin.user.delete', ['id' => $user->id]) }}"
                                                     class="btn btn-danger btn-delete">Delete</a>
                                             </td>
@@ -75,13 +79,50 @@
                             </table>
                         </div>
                         <div class="card-footer d-flex align-items-center">
-                            {!! $users->links('pagination::bootstrap-4') !!}
-                            {{-- <p class="m-0 text-secondary">Showing <span>1</span> to <span>8</span> of <span>16</span>
-                                entries</p> --}}
+                            {!! $users->links('pagination::bootstrap-4') !!} 
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    @push('script')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkboxes = document.querySelectorAll('.toggle-recommendation');
+
+            checkboxes.forEach((checkbox) => {
+                checkbox.addEventListener('change', function() {
+                    const videoId = this.getAttribute('data-id');
+                    const isChecked = this.checked;
+
+                    fetch(`/user/change/status/${videoId}`, {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN':  "{{ csrf_token() }}",
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                is_recommended: isChecked ? 1 : 0
+                            }),
+                        })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            if (data.success) {
+                                alert(data.message);
+                            } else {
+                                alert('Failed to update status');
+                                this.checked = !isChecked; // Revert checkbox state
+                            }
+                        })
+                        .catch((e) => {
+                            console.log(e.message);
+                            alert('An error occurred');
+                            this.checked = !isChecked; // Revert checkbox state
+                        });
+                });
+            });
+        });
+    </script>
+@endpush
 @endsection

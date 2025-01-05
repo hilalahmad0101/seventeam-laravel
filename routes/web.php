@@ -26,6 +26,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/logout', 'logout')->name('admin.logout');
         Route::get('/user/list', 'user_list')->name('admin.user.list');
         Route::get('/user/delete/{id}', 'user_delete')->name('admin.user.delete');
+        Route::post('/user/change/status/{id}', 'user_status')->name('admin.user.status');
     });
     Route::controller(CategoryController::class)->group(function () {
         Route::get('/categories/list', 'index')->name('admin.category.list');
@@ -50,9 +51,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/video/list', 'index')->name('admin.video.list');
         Route::get('/video/create', 'create')->name('admin.video.create');
         Route::post('/upload-chunk', 'uploadChunk')->name('admin.video.store');
+        Route::post('/update-upload-chunk', 'updateUploadChunk');
         Route::post('/stop-upload', 'stopUpload')->name('admin.video.stop');
         Route::post('/resume-upload', 'resumeUpload')->name('admin.video.resume');
         Route::post('/get-upload-progress', 'getUploadProgress');
+        Route::get('/video/edit/{id}', 'edit')->name('admin.video.edit');
+        Route::post('/get-update-upload-progress', 'getUpdateUploadProgress');
         Route::get('/delete-video/{id}', 'deleteVideo')->name('admin.video.delete');
+        Route::post('/change/status/{id}', 'changeStatus')->name('admin.video.recommended');
     });
 });
