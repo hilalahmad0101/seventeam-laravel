@@ -53,6 +53,6 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/stop-upload', 'stopUpload')->name('admin.video.stop');
         Route::post('/resume-upload', 'resumeUpload')->name('admin.video.resume');
         Route::post('/get-upload-progress', 'getUploadProgress');
-        Route::post('/delete-video', 'deleteVideo')->name('admin.video.delete');
+        Route::get('/delete-video/{id}', 'deleteVideo')->name('admin.video.delete');
     });
 });

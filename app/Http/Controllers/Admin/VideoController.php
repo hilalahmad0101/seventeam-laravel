@@ -129,31 +129,33 @@ class VideoController extends Controller
     }
 
 
-    public function deleteVideo(Request $request)
+    public function deleteVideo(Request $request,$id)
     {
         $fileName = $request->input('fileName');
 
         // Find the upload record
-        $upload = Video::where('file_name', $fileName)->first();
+        $upload = Video::where('id', $id)->first();
 
         if (!$upload) {
             return response()->json(['error' => 'Record not found.'], 404);
         }
 
-        // Delete the database record
-        $upload->delete();
-
+       
         // Mark the file for deletion
-        $filePath = storage_path("app/uploads/{$fileName}");
-
+        $filePath = storage_path("app/uploads/{$upload->fileName}");
         if (file_exists($filePath)) {
             // Dispatch a background job for file deletion
             DeleteVideoFileJob::dispatch($filePath);
 
-            return response()->json(['message' => 'Record deleted. File deletion is in progress.']);
+            // return response()->json(['message' => 'Record deleted. File deletion is in progress.']);
         }
 
-        return response()->json(['message' => 'Record deleted. File not found.']);
+         // Delete the database record
+         $upload->delete();
+
+
+        // return response()->json(['message' => 'Record deleted. File not found.']);
+        return to_route('admin.video.list')->with('success','Video Delete successfully');
     }
 
 

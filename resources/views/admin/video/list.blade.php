@@ -65,6 +65,7 @@
                                         <th>Video Name</th>
                                         <th>Current Chunk</th>
                                         <th>Total Chunk</th>
+                                        <th>Thumbnail</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -76,6 +77,9 @@
                                             <td>{{ $video->category->name }}</td>
                                             <td>{{ $video->current_chunk }}</td>
                                             <td>{{ $video->total_chunks }}</td>
+                                            <td>
+                                                <img src="{{ asset('images/video/thumbnail/'.$video->thumbnail) }}" style="width: 100px" alt="">
+                                            </td>
                                             <td>
                                                 {{-- <a href="{{ route('admin.video.edit', ['id' => $video->id]) }}"
                                                     class="btn btn-success">Edit</a> --}}
