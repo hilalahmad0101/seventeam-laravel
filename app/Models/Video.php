@@ -15,6 +15,7 @@ class Video extends Model
         'file_name',
         'file_path',
         'current_chunk',
+        'thumbnail',
         'total_chunks',
     ];
 

@@ -81,6 +81,11 @@
                                                 </div>
 
                                                 <div class="col-sm-12 col-md-12">
+                                                    <label for="">Upload Thumbnail</label>
+                                                    <input type="file" class="form-control" id="video-thumbnail">
+                                                </div>
+
+                                                <div class="col-sm-12 col-md-12">
                                                     <label for="">Upload Video</label>
                                                     <input type="file" class="form-control" id="video-upload">
                                                     <progress id="progress-bar" value="0"
@@ -106,6 +111,7 @@
     </div>
     <script>
         const fileInput = document.getElementById('video-upload');
+        const fileThumbnail = document.getElementById('video-thumbnail');
         const progressBar = document.getElementById('progress-bar');
         const stopButton = document.getElementById('stop-button');
         const resumeButton = document.getElementById('resume-button');
@@ -113,7 +119,7 @@
 
         const CHUNK_SIZE = 1 * 1024 * 1024; // 10 MB
         let file, totalChunks, currentChunk = 0,
-            uploading = false;
+            uploading = false,thumbnail;
 
         // Store selected file and initialize chunk details
         fileInput.addEventListener('change', () => {
@@ -122,6 +128,10 @@
             currentChunk = 0;
             progressBar.value = 0;
         });
+
+        fileThumbnail.addEventListener('change', function(){
+            thumbnail=fileThumbnail.files[0];
+        })
 
         // Start uploading when Upload button is clicked
         uploadButton.addEventListener('click', async () => {
@@ -204,6 +214,7 @@
 
                 const formData = new FormData();
                 formData.append('file', chunk);
+                formData.append('thumbnail',thumbnail);
                 formData.append('fileName', file.name);
                 formData.append('chunkIndex', currentChunk);
                 formData.append('totalChunks', totalChunks);

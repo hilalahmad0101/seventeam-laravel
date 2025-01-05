@@ -55,6 +55,9 @@ class HomeController extends Controller
                         return [
                             'id' => $video->id,
                             'title' => $video->title,
+                            'description' => $video->description,
+                            'thumbnail' => 'images/video/thumbnail/'.$video->thumbnail,
+                            'file' => '/storage/app/uploads/' . $video->file_name,
                             // Include other video fields as needed
                         ];
                     }),

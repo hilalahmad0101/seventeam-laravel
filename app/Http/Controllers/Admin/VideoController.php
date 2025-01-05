@@ -18,8 +18,8 @@ class VideoController extends Controller
     }
     public function create()
     {
-        $categories=Category::latest()->get();
-        return view('admin.video.create',compact('categories'));
+        $categories = Category::latest()->get();
+        return view('admin.video.create', compact('categories'));
     }
     public function uploadChunk(Request $request)
     {
@@ -27,16 +27,22 @@ class VideoController extends Controller
         $chunkIndex = $request->input('chunkIndex');
         $totalChunks = $request->input('totalChunks');
 
+        // upload image code please
+
+
+
+
         // Find or create an upload record
         $upload = Video::firstOrCreate(
             ['file_name' => $fileName],
             [
-                'title'=>$request->title,
-                'description'=>$request->description,
-                'category_id'=>$request->category_id,
+                'title' => $request->title,
+                'description' => $request->description,
+                'category_id' => $request->category_id,
                 'file_path' => 'uploads/' . $fileName,
                 'current_chunk' => 0,
                 'total_chunks' => $totalChunks,
+                // 'thumbnail' => $imageName,
                 'status' => 'in_progress',
             ]
         );
@@ -72,6 +78,10 @@ class VideoController extends Controller
             rmdir($tempDir);
 
             $upload->status = 'completed';
+
+            $imageName = time() . '.' . $request->thumbnail->getClientOriginalExtension();
+            $request->thumbnail->move(public_path('images/video/thumbnail'), $imageName);
+            $upload->thumbnail = $imageName;
             $upload->save();
 
             return response()->json(['message' => 'Upload complete'], 200);
@@ -120,31 +130,31 @@ class VideoController extends Controller
 
 
     public function deleteVideo(Request $request)
-{
-    $fileName = $request->input('fileName');
+    {
+        $fileName = $request->input('fileName');
 
-    // Find the upload record
-    $upload = Video::where('file_name', $fileName)->first();
+        // Find the upload record
+        $upload = Video::where('file_name', $fileName)->first();
 
-    if (!$upload) {
-        return response()->json(['error' => 'Record not found.'], 404);
+        if (!$upload) {
+            return response()->json(['error' => 'Record not found.'], 404);
+        }
+
+        // Delete the database record
+        $upload->delete();
+
+        // Mark the file for deletion
+        $filePath = storage_path("app/uploads/{$fileName}");
+
+        if (file_exists($filePath)) {
+            // Dispatch a background job for file deletion
+            DeleteVideoFileJob::dispatch($filePath);
+
+            return response()->json(['message' => 'Record deleted. File deletion is in progress.']);
+        }
+
+        return response()->json(['message' => 'Record deleted. File not found.']);
     }
-
-    // Delete the database record
-    $upload->delete();
-
-    // Mark the file for deletion
-    $filePath = storage_path("app/uploads/{$fileName}");
-
-    if (file_exists($filePath)) {
-        // Dispatch a background job for file deletion
-        DeleteVideoFileJob::dispatch($filePath);
-
-        return response()->json(['message' => 'Record deleted. File deletion is in progress.']);
-    }
-
-    return response()->json(['message' => 'Record deleted. File not found.']);
-}
 
 
 }
