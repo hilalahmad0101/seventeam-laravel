@@ -14,7 +14,6 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
             $table->string('title')->nullable();
-            $table->string('thumbnail')->nullable();
             $table->text('description')->nullable();
             $table->string('file_name');
             $table->string('file_path');
