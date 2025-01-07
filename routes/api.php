@@ -24,9 +24,10 @@ Route::middleware([LogVisitor::class])->group(function () {
     Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
         return request()->user();
     });
-
-
     Route::middleware(['auth:sanctum'])->group(function () {
+        Route::prefix('user')->group(function () {
+            Route::post('reset/password', [AuthController::class, 'resetPassword']);
+        });
         Route::controller(HomeController::class)->group(function () {
             Route::get('/video/list', 'listOfMovies');
             Route::get('/videos/with/categories/list', 'listMoviesByCategory');
