@@ -34,6 +34,7 @@ class AuthController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'code' => $code,
+                'status'=>1,
                 'password' => Hash::make($request->password)
             ]);
 
